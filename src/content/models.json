@@ -1,0 +1,125 @@
+[
+  {
+    "id": "a380-800",
+    "manufacturer": "Airbus",
+    "family": "A380",
+    "variant": "800",
+    "designation": "A380-800",
+    "engineCount": 4,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "fence"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Four engines under the wing, and a second deck of windows along the full length of the body."
+      }
+    ],
+    "photoIds": []
+  },
+  {
+    "id": "a340-300",
+    "manufacturer": "Airbus",
+    "family": "A340",
+    "variant": "300",
+    "designation": "A340-300",
+    "engineCount": 4,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "canted"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Four engines under a long, thin wing, on a body with one deck. Small engines for an aircraft of this length."
+      }
+    ],
+    "photoIds": []
+  },
+  {
+    "id": "b737-800",
+    "manufacturer": "Boeing",
+    "family": "737",
+    "variant": "800",
+    "designation": "737-800",
+    "engineCount": 2,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "blended",
+      "split-scimitar",
+      "none"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Two engines, very close to the ground. The engine intake is flat at the bottom."
+      }
+    ],
+    "photoIds": []
+  },
+  {
+    "id": "a320",
+    "manufacturer": "Airbus",
+    "family": "A320",
+    "variant": "200",
+    "designation": "A320",
+    "engineCount": 2,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "fence",
+      "sharklet"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Two engines with round intakes, a good gap above the ground. A small fence or a curved sharklet at the wingtip."
+      }
+    ],
+    "photoIds": []
+  },
+  {
+    "id": "b777-300er",
+    "manufacturer": "Boeing",
+    "family": "777",
+    "variant": "300ER",
+    "designation": "777-300ER",
+    "engineCount": 2,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "raked"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Only two engines on a very long body, and each engine is almost as wide as the body. The tail cone ends in a flat blade."
+      }
+    ],
+    "photoIds": []
+  },
+  {
+    "id": "a220-300",
+    "manufacturer": "Airbus",
+    "family": "A220",
+    "variant": "300",
+    "designation": "A220-300",
+    "engineCount": 2,
+    "enginePosition": "underwing",
+    "tailType": "conventional",
+    "wingletTypes": [
+      "blended"
+    ],
+    "tells": [
+      {
+        "feature": "engine-count",
+        "text": "Two engines that look large for the small body. Large cockpit windows, and five seats across the cabin."
+      }
+    ],
+    "photoIds": []
+  }
+]

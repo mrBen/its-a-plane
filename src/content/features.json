@@ -1,0 +1,19 @@
+[
+  {
+    "id": "engine-count",
+    "name": "Engine count",
+    "glossary": "Count the engines under the wings first. Almost every airliner in passenger service today has two. Four engines means an A380 or an A340. Three engines means an old trijet, and today only a few freighters still fly one.",
+    "types": [
+      {
+        "id": "four",
+        "name": "Four engines",
+        "modelIds": ["a380-800", "a340-300"]
+      },
+      {
+        "id": "two",
+        "name": "Two engines",
+        "modelIds": ["b737-800", "a320", "b777-300er", "a220-300"]
+      }
+    ]
+  }
+]
