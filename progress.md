@@ -5,7 +5,7 @@ The execution agent writes this file. bcollet reads it. One row for each task of
 
 | Task | Title | Status | Date | Verification result | Note |
 |---|---|---|---|---|---|
-| 1 | Make npm work | not started | | | |
+| 1 | Make npm work | done | 2026-10-29 | In the `javascript-node:26` container with `.devcontainer/local.env`: `node --version` printed v26.12.1, `npm ping` printed PONG. A test install wrote a lockfile with 0 `resolved` lines | Node runs in the devcontainer, not on the host. A local registry sits in the git-ignored `local.env` |
 | 2 | Create the Astro project | not started | | | |
 | 3 | Add Svelte and the Bulma file | not started | | | |
 | 4 | Write the data schema | not started | | | |

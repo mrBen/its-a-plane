@@ -89,15 +89,15 @@ The site runs as static files on GitHub Pages, with no server and no account.
 | 46 | The theme follows the system, plus a switch. The switch stores one value | bcollet | 2026-10-28 |
 | 47 | No mascot in the first version | bcollet | 2026-10-28 |
 | 48 | The GitHub repository description: "Learn to name an airliner from a photo, two minutes at a time." | bcollet | 2026-10-28 |
+| 49 | Node 26 runs in a devcontainer, `mcr.microsoft.com/devcontainers/javascript-node:26`. Nothing installs on the host | bcollet | 2026-10-29 |
+| 50 | The repo keeps the default npm registry. A local registry goes in `.devcontainer/local.env`, and git ignores that file | bcollet | 2026-10-29 |
+| 51 | `local.env` sets `npm_config_omit_lockfile_registry_resolved=true`, so no local registry host goes into `package-lock.json` | Claude proposes, nobody decided yet | 2026-10-29 |
 
 ## Open questions
 
-1. The npm registry. This agent sandbox cannot reach `registry.npmjs.org`. I
-   tested it on 2026-10-28: the host times out, and `www.npmjs.com` answers 403.
-   `nodejs.org` and `cdn.jsdelivr.net` both answer 200. So an agent in this
-   sandbox cannot run `npm install`. bcollet runs the npm commands in his own
-   shell, or the proxy allowlist needs `registry.npmjs.org`. Task 1 of the build
-   plan settles it.
+1. The npm registry. Closed on 2026-10-29. The work network blocks
+   `registry.npmjs.org`. At work, `.devcontainer/local.env` points npm to the
+   local registry. See decisions 49 to 51.
 2. The mascot. One idea sits on the table: a bird that people take for a plane,
    from the line in the name. Nobody decided it.
 3. The photo source for the full course. Wikimedia Commons serves the first six

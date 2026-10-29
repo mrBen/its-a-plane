@@ -1,0 +1,8 @@
+{
+  "name": "its-a-plane",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:26",
+  "initializeCommand": "touch .devcontainer/local.env",
+  "runArgs": ["--env-file", "${localWorkspaceFolder}/.devcontainer/local.env"],
+  "forwardPorts": [4321],
+  "remoteUser": "node"
+}
