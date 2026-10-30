@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "id": "a380-800-1",
+    "modelId": "a380-800",
+    "image": "img/a380-800.jpg",
+    "author": "Julian Herzog",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 18,
+        "y": 44,
+        "width": 58,
+        "height": 16
+      }
+    ],
+    "labels": [
+      {
+        "text": "Four engines",
+        "x": 47,
+        "y": 62
+      }
+    ]
+  },
+  {
+    "id": "a340-300-1",
+    "modelId": "a340-300",
+    "image": "img/a340-300.jpg",
+    "author": "Julian Herzog",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 36,
+        "y": 56,
+        "width": 43,
+        "height": 11
+      }
+    ],
+    "labels": [
+      {
+        "text": "Four engines",
+        "x": 58,
+        "y": 69
+      }
+    ]
+  },
+  {
+    "id": "b737-800-1",
+    "modelId": "b737-800",
+    "image": "img/b737-800.jpg",
+    "author": "Alf van Beem",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:EI-DCG_Ryanair_Boeing_737-8AS(WL)_-_cn_33805_takeoff_from_Schiphol_pic1.JPG",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 27,
+        "y": 49,
+        "width": 23,
+        "height": 9
+      }
+    ],
+    "labels": [
+      {
+        "text": "Two engines",
+        "x": 38,
+        "y": 60
+      }
+    ]
+  },
+  {
+    "id": "a320-1",
+    "modelId": "a320",
+    "image": "img/a320.jpg",
+    "author": "Laurent ERRERA",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 18,
+        "y": 48,
+        "width": 34,
+        "height": 19
+      }
+    ],
+    "labels": [
+      {
+        "text": "Two engines",
+        "x": 35,
+        "y": 69
+      }
+    ]
+  },
+  {
+    "id": "b777-300er-1",
+    "modelId": "b777-300er",
+    "image": "img/b777-300er.jpg",
+    "author": "4300streetcar",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 30,
+        "y": 45,
+        "width": 17,
+        "height": 17
+      }
+    ],
+    "labels": [
+      {
+        "text": "Two engines",
+        "x": 38,
+        "y": 64
+      }
+    ]
+  },
+  {
+    "id": "a220-300-1",
+    "modelId": "a220-300",
+    "image": "img/a220-300.jpg",
+    "author": "Jevgenijs Slihto",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "crops": [
+      {
+        "part": "engine",
+        "x": 40,
+        "y": 50,
+        "width": 38,
+        "height": 15
+      }
+    ],
+    "labels": [
+      {
+        "text": "Two engines",
+        "x": 59,
+        "y": 67
+      }
+    ]
+  }
+]
