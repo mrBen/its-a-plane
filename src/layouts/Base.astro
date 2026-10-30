@@ -1,0 +1,81 @@
+---
+import '../styles/bulma.min.css';
+import '../styles/site.css';
+import { strings } from '../strings';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pageTitle = title ? `${title} · ${strings.siteTitle}` : strings.siteTitle;
+const themes = ['light', 'dark', 'system'] as const;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="icon" href={`${base}/favicon.ico`} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <!-- Inline and in the head, so a stored theme applies before the first paint. -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme === 'light' || theme === 'dark') {
+        document.documentElement.dataset.theme = theme;
+      }
+    </script>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container is-max-tablet">
+        <header class="block">
+          <h1 class="title is-1"><a href={`${base}/`}>{strings.siteTitle}</a></h1>
+          <p class="subtitle">{strings.tagline}</p>
+        </header>
+        <main class="block">
+          <slot />
+        </main>
+        <footer class="block">
+          <div class="buttons has-addons" role="group" aria-label={strings.theme.label}>
+            {themes.map((t) => (
+              <button type="button" class="button is-small" data-theme-choice={t}>
+                {strings.theme[t]}
+              </button>
+            ))}
+          </div>
+        </footer>
+      </div>
+    </section>
+    <script>
+      const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-choice]');
+
+      function show(choice: string) {
+        for (const b of buttons) {
+          const on = b.dataset.themeChoice === choice;
+          b.classList.toggle('is-selected', on);
+          b.classList.toggle('is-link', on);
+          b.setAttribute('aria-pressed', String(on));
+        }
+      }
+
+      function apply(choice: string) {
+        if (choice === 'system') {
+          delete document.documentElement.dataset.theme;
+        } else {
+          document.documentElement.dataset.theme = choice;
+        }
+        localStorage.setItem('theme', choice);
+        show(choice);
+      }
+
+      show(localStorage.getItem('theme') ?? 'system');
+      for (const b of buttons) {
+        b.addEventListener('click', () => apply(b.dataset.themeChoice!));
+      }
+    </script>
+  </body>
+</html>

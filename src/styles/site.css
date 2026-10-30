@@ -1,0 +1,21 @@
+/* Decision 45: the system font for the text, a monospace face for a model
+   designation. */
+:root {
+  --bulma-family-primary: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bulma-family-code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --bulma-card-radius: 1.25rem;
+}
+
+.designation {
+  font-family: var(--bulma-family-code);
+}
+
+/* One accent color for each unit (decision 36). The palette is still open, so
+   the first unit takes the Bulma primary color. */
+.unit-card {
+  border-top: 0.5rem solid var(--unit-accent, var(--bulma-primary));
+}
+
+.unit-card .progress {
+  margin-bottom: 0.5rem;
+}
