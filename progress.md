@@ -17,8 +17,20 @@ The execution agent writes this file. bcollet reads it. One row for each task of
 | 10 | Build the card that turns | not started | | | |
 | 11 | Add the repeat queue and the score screen | not started | | | |
 | 12 | Add the manifest and the install | not started | | | |
-| 13 | Add the deploy action | done | 2026-10-30 | `npm run build` printed "2 page(s) built" and "Complete!". `git check-ignore` does not match `package-lock.json`, and git tracks it. I read the workflow file after I wrote it | Done before tasks 9 to 12, at the request of bcollet, because it does not depend on them. The workflow follows the Astro deploy guide, read on 2026-10-30: `actions/checkout@v7`, `withastro/action@v6`, `actions/deploy-pages@v5`. One change: `node-version: 26`, the same as the devcontainer, because the action defaults to 24. The repository is private today, and decision 34 says public. On a free GitHub account, Pages does not publish from a private repository, so the deploy job fails until bcollet makes the repository public or uses a paid plan. `package-lock.json` holds no `resolved` line and 283 `integrity` lines, so `npm ci` on GitHub downloads from the public registry and checks each hash. The first run shows whether that works |
+| 13 | Add the deploy action | done | 2026-10-30 | `npm run build` printed "2 page(s) built" and "Complete!". `git check-ignore` does not match `package-lock.json`, and git tracks it. I read the workflow file after I wrote it | Done before tasks 9 to 12, at the request of bcollet, because it does not depend on them. The workflow follows the Astro deploy guide, read on 2026-10-30: `actions/checkout@v7`, `withastro/action@v6`, `actions/deploy-pages@v5`. One change: `node-version: 26`, the same as the devcontainer, because the action defaults to 24. `package-lock.json` holds no `resolved` line and 283 `integrity` lines, so `npm ci` on GitHub downloads from the public registry and checks each hash. bcollet made the repository public, set Pages to GitHub Actions, and pushed on 2026-10-30. The first run passed. The index page, `/learn/engine-count/`, one photo and the favicon answered 200. `mrben.github.io` redirects to `https://www.benjamin-collet.fr/its-a-plane/`, the custom domain of the account. `site` in `astro.config.mjs` stays `https://mrben.github.io` for now, as bcollet decided on 2026-10-30. Task 12 needs to look at it again, if the manifest needs full URLs |
 | 14 | Survey the photo sources | not started | | | |
+
+## Open points
+
+Listed on 2026-10-30, at the end of the session that did tasks 5 to 8 and 13.
+None of them blocks task 9.
+
+| # | Point | Blocks | Proposal |
+|---|---|---|---|
+| 1 | bcollet did not check the tells and the glossary text of task 4 yet (decision 21) | Task 10, which shows the tell on the back of the card | bcollet checks `src/content/models.json` and `src/content/features.json` before task 10 |
+| 2 | Decisions 35 and 51 in `README.md` read "Claude proposes, nobody decided yet". The code follows both | Nothing | bcollet accepts or rejects each one, and the session updates `README.md` |
+| 3 | The commit rule lives in the memory of one machine only: one commit for each task, the session names the files and the message, and bcollet asks for the commit | A session on another machine | Add the rule to `AGENTS.md` |
+| 4 | The accent color for each unit (`README.md`, open question 4) | Nothing until a second unit exists | Wait |
 
 ## The rules for this file
 
