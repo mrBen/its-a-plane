@@ -95,9 +95,9 @@ The site runs as static files on GitHub Pages, with no server and no account.
 
 ## Open questions
 
-1. The npm registry. Closed on 2026-10-29. The work network blocks
-   `registry.npmjs.org`. At work, `.devcontainer/local.env` points npm to the
-   local registry. See decisions 49 to 51.
+1. The npm registry. Closed on 2026-10-29. Where `registry.npmjs.org` is out
+   of reach, `.devcontainer/local.env` points npm to a local registry. See
+   decisions 49 to 51.
 2. The mascot. One idea sits on the table: a bird that people take for a plane,
    from the line in the name. Nobody decided it.
 3. The photo source for the full course. Wikimedia Commons serves the first six
