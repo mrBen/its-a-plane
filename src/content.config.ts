@@ -39,6 +39,7 @@ const photos = defineCollection({
     author: z.string(),
     license: z.string(),
     licenseUrl: z.url(),
+    sourceUrl: z.url(),
     crops: z.array(
       z.object({
         part: z.string(),

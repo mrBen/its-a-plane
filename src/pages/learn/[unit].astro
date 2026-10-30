@@ -1,0 +1,48 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Compare from '../../components/Compare.astro';
+import { strings } from '../../strings';
+import { units, type UnitId } from '../../units';
+
+export function getStaticPaths() {
+  return Object.keys(units).map((unit) => ({ params: { unit } }));
+}
+
+const unitId = Astro.params.unit as UnitId;
+const unit = strings.units[unitId];
+const { photoIds, part } = units[unitId];
+const [left, right] = await Promise.all(photoIds.map((id) => getEntry('photos', id)));
+if (!left || !right) throw new Error(`Unit ${unitId}: unknown photo id`);
+---
+
+<Base title={unit.name}>
+  <h2 class="title is-3">{unit.name}</h2>
+
+  <!-- The hash picks the screen, so the back button and a reload keep it, and no
+       script runs. Decision 18: the player skips the teaching screen with the
+       button, and the link brings it back. -->
+  <section id="teaching">
+    <Compare photos={[left, right]} part={part} />
+    <p class="block is-size-5">{unit.teaching}</p>
+    <a class="button is-primary is-rounded is-medium" href="#lesson">{strings.startLesson}</a>
+  </section>
+
+  <section id="lesson">
+    <p class="block"><a href="#teaching">{strings.showTeaching}</a></p>
+    <!-- TODO: task 8 puts the lesson island here. -->
+    <p class="block">{strings.lessonPlaceholder}</p>
+  </section>
+</Base>
+
+<style>
+  #lesson {
+    display: none;
+  }
+  #lesson:target {
+    display: block;
+  }
+  :global(main:has(#lesson:target)) #teaching {
+    display: none;
+  }
+</style>

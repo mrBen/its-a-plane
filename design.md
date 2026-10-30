@@ -24,7 +24,7 @@ field.
 | Collection | File | Fields |
 |---|---|---|
 | models | `src/content/models.json` | id, manufacturer, family, variant, designation, engine count, engine position, tail type, winglet type, the tells, the photo ids |
-| photos | `src/content/photos.json` | id, the model id, the image path, the author, the license, the license link, the crop boxes, the labels |
+| photos | `src/content/photos.json` | id, the model id, the image path, the author, the license, the license link, the source link, the crop boxes, the labels |
 | features | `src/content/features.json` | id, the name, the glossary text, the types, the model ids for each type |
 
 A crop box holds a part name and four numbers: x, y, width and height, in

@@ -1,0 +1,72 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import { strings } from '../strings';
+
+interface Props {
+  photos: [CollectionEntry<'photos'>, CollectionEntry<'photos'>];
+  part: string;
+}
+
+const { photos, part } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const items = await Promise.all(
+  photos.map(async (photo) => {
+    const model = await getEntry(photo.data.modelId);
+    const crop = photo.data.crops.find((c) => c.part === part);
+    if (!model) throw new Error(`Photo ${photo.id}: unknown model`);
+    if (!crop) throw new Error(`Photo ${photo.id}: no crop box named ${part}`);
+    return { photo: photo.data, model: model.data, crop };
+  }),
+);
+---
+
+<div class="columns">
+  {
+    items.map(({ photo, model, crop }) => (
+      <figure class="column compare">
+        <div class="compare-photo">
+          <img src={`${base}/${photo.image}`} alt={model.designation} />
+          <span
+            class="compare-box"
+            style={`left:${crop.x}%;top:${crop.y}%;width:${crop.width}%;height:${crop.height}%`}
+          />
+          {photo.labels.map((label) => (
+            <span class="tag is-warning is-medium compare-label" style={`left:${label.x}%;top:${label.y}%`}>
+              {label.text}
+            </span>
+          ))}
+        </div>
+        <figcaption>
+          <p class="designation is-size-5">{model.designation}</p>
+          <p class="is-size-7">
+            <a href={photo.sourceUrl}>{strings.photoCredit(photo.author)}</a>,{' '}
+            <a href={photo.licenseUrl}>{photo.license}</a>
+          </p>
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .compare-photo {
+    position: relative;
+  }
+  .compare-photo img {
+    display: block;
+    width: 100%;
+    border-radius: var(--bulma-radius-large);
+  }
+  .compare-box {
+    position: absolute;
+    border: 3px solid var(--bulma-warning);
+    border-radius: var(--bulma-radius);
+  }
+  /* The label point is its top center, so the tag hangs below the engine box. */
+  .compare-label {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+</style>
