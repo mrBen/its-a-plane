@@ -17,7 +17,7 @@ The execution agent writes this file. bcollet reads it. One row for each task of
 | 10 | Build the card that turns | not started | | | |
 | 11 | Add the repeat queue and the score screen | not started | | | |
 | 12 | Add the manifest and the install | not started | | | |
-| 13 | Add the deploy action | not started | | | |
+| 13 | Add the deploy action | done | 2026-10-30 | `npm run build` printed "2 page(s) built" and "Complete!". `git check-ignore` does not match `package-lock.json`, and git tracks it. I read the workflow file after I wrote it | Done before tasks 9 to 12, at the request of bcollet, because it does not depend on them. The workflow follows the Astro deploy guide, read on 2026-10-30: `actions/checkout@v7`, `withastro/action@v6`, `actions/deploy-pages@v5`. One change: `node-version: 26`, the same as the devcontainer, because the action defaults to 24. The repository is private today, and decision 34 says public. On a free GitHub account, Pages does not publish from a private repository, so the deploy job fails until bcollet makes the repository public or uses a paid plan. `package-lock.json` holds no `resolved` line and 283 `integrity` lines, so `npm ci` on GitHub downloads from the public registry and checks each hash. The first run shows whether that works |
 | 14 | Survey the photo sources | not started | | | |
 
 ## The rules for this file
