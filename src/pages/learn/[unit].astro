@@ -1,7 +1,8 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Compare from '../../components/Compare.astro';
+import Lesson from '../../components/Lesson.svelte';
 import { strings } from '../../strings';
 import { units, type UnitId } from '../../units';
 
@@ -14,13 +15,32 @@ const unit = strings.units[unitId];
 const { photoIds, part } = units[unitId];
 const [left, right] = await Promise.all(photoIds.map((id) => getEntry('photos', id)));
 if (!left || !right) throw new Error(`Unit ${unitId}: unknown photo id`);
+
+// The unit feature lists the models that the lesson draws from.
+const feature = await getEntry('features', unitId);
+if (!feature) throw new Error(`Unit ${unitId}: no feature with this id`);
+const modelIds = new Set(feature.data.types.flatMap((t) => t.modelIds.map((m) => m.id)));
+const models = (await getCollection('models', (m) => modelIds.has(m.id))).map((m) => ({
+  id: m.id,
+  designation: m.data.designation,
+}));
+const photos = (await getCollection('photos', (p) => modelIds.has(p.data.modelId.id))).map((p) => ({
+  id: p.id,
+  modelId: p.data.modelId.id,
+  image: p.data.image,
+  author: p.data.author,
+  license: p.data.license,
+  licenseUrl: p.data.licenseUrl,
+  sourceUrl: p.data.sourceUrl,
+}));
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Base title={unit.name}>
   <h2 class="title is-3">{unit.name}</h2>
 
   <!-- The hash picks the screen, so the back button and a reload keep it, and no
-       script runs. Decision 18: the player skips the teaching screen with the
+       script switches the screens. Decision 18: the player skips the teaching screen with the
        button, and the link brings it back. -->
   <section id="teaching">
     <Compare photos={[left, right]} part={part} />
@@ -30,8 +50,9 @@ if (!left || !right) throw new Error(`Unit ${unitId}: unknown photo id`);
 
   <section id="lesson">
     <p class="block"><a href="#teaching">{strings.showTeaching}</a></p>
-    <!-- TODO: task 8 puts the lesson island here. -->
-    <p class="block">{strings.lessonPlaceholder}</p>
+    <!-- client:only, because the island draws the exercises at random, and a
+         server render would draw a different set. -->
+    <Lesson client:only="svelte" models={models} photos={photos} base={base} />
   </section>
 </Base>
 

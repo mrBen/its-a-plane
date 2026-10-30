@@ -14,7 +14,15 @@ export const strings = {
   unitStart: 'Start',
   startLesson: 'Start the lesson',
   showTeaching: 'See the two photos again',
-  lessonPlaceholder: 'The exercises come here.',
+  lesson: {
+    question: 'Which aircraft is this?',
+    photoAlt: 'An airliner. Name the model.',
+    next: 'Next',
+    finish: 'See the score',
+    exercise: (n: number, total: number) => `Exercise ${n} of ${total}`,
+    score: (right: number) => `Score: ${right}`,
+    done: (right: number, total: number) => `Lesson done. ${right} of ${total} right.`,
+  },
   photoCredit: (author: string) => `Photo: ${author}`,
   unitProgress: (done: number, total: number) => `${done} of ${total} lessons done`,
   theme: {

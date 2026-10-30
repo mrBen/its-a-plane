@@ -219,16 +219,24 @@ nothing.
 - Files: `src/components/Lesson.svelte`.
 - Context: decision 12 asks for the missed exercise at the end of the lesson.
   Decision 13 asks for a score at the end, and nothing locks on it. Decision 7
-  says the lesson ends whatever the score.
+  says the lesson ends whatever the score. The teaching screen and the lesson
+  share one page, and the URL hash switches them. So the island keeps its state
+  when the player goes to the teaching screen and back. bcollet found on
+  2026-10-30 that a finished lesson then stays on the score, and decided that
+  task 11 fixes it.
 - Steps:
   1. Push a missed exercise to the end of the queue.
   2. Mark a repeated exercise, so it does not count twice in the score.
   3. Write the score screen: the count of right answers out of five.
   4. Add a button named "Play again", and a link back to the unit list.
-- Verification: run `npm run dev`. Miss one exercise on purpose. Then run
+  5. When the hash changes to `#lesson` and the lesson is finished, draw five
+     new exercises. Keep the state of a lesson that is not finished.
+- Verification: run `npm run dev`. Miss one exercise on purpose. Finish the
+  lesson, open the teaching screen, and click "Start the lesson". Then run
   `npm run build`.
 - Done when: the missed exercise returns once, the score screen shows the count,
-  and the build passes.
+  "Start the lesson" after a finished lesson starts a new one, and the build
+  passes.
 
 ## Task 12, add the manifest and the install
 
