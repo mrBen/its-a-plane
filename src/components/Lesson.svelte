@@ -93,6 +93,11 @@
   let index = $state(0);
   let picked = $state<string | null>(null);
 
+  // The mark on the front needs a moment to read before the card turns.
+  const REVEAL_DELAY = 800;
+  let turned = $state(false);
+  let turnTimer: ReturnType<typeof setTimeout> | undefined;
+
   // Decision 13: the score counts each exercise once, however many times it
   // comes back. Decision 12: a missed exercise returns at the end of the queue.
   let scored = $state<number[]>([]);
@@ -101,6 +106,7 @@
   let exercise = $derived(queue[index]);
   let finished = $derived(index >= queue.length);
   let isLast = $derived(index === queue.length - 1);
+  let correct = $derived(picked !== null && picked === exercise?.answer.id);
 
   function pick(modelId: string) {
     if (picked) return;
@@ -111,17 +117,25 @@
     } else if (!exercise.repeat) {
       queue.push({ ...exercise, repeat: true });
     }
+    clearTimeout(turnTimer);
+    turnTimer = setTimeout(() => {
+      turned = true;
+    }, REVEAL_DELAY);
   }
 
   function next() {
+    clearTimeout(turnTimer);
+    turned = false;
     picked = null;
     index++;
   }
 
   function playAgain() {
+    clearTimeout(turnTimer);
     queue = draw();
     index = 0;
     picked = null;
+    turned = false;
     scored = [];
   }
 
@@ -167,9 +181,9 @@
     </div>
     <progress class="progress is-large is-primary" value={index} max={queue.length}></progress>
 
-    <div class="card flip-card" class:turned={picked !== null}>
+    <div class="card flip-card" class:turned={turned}>
       <div class="flip">
-        <div class="face front" aria-hidden={picked !== null} inert={picked !== null}>
+        <div class="face front" aria-hidden={turned} inert={turned}>
           <div class="card-image">
             {#if exercise.kind === 'crop'}
               <Crop photo={exercise.photo} {part} {base} alt={strings.lesson.cropAlt} />
@@ -203,8 +217,13 @@
           </div>
         </div>
 
-        <div class="face back" aria-hidden={picked === null} inert={picked === null}>
+        <div class="face back" aria-hidden={!turned} inert={!turned}>
           <div class="card-content back-content">
+            <p class="block">
+              <span class="tag is-medium {correct ? 'is-success' : 'is-danger'}">
+                {correct ? strings.lesson.right : strings.lesson.wrong}
+              </span>
+            </p>
             <p class="designation title is-3">{exercise.answer.designation}</p>
             <p class="block is-size-5">{exercise.answer.tell}</p>
             <button type="button" class="button is-primary is-rounded is-medium" onclick={next}>

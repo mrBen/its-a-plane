@@ -26,6 +26,8 @@ export const strings = {
     done: (right: number, total: number) => `Lesson done. ${right} of ${total} right.`,
     playAgain: 'Play again',
     backToUnits: 'Back to the units',
+    right: 'Correct',
+    wrong: 'Not quite',
   },
   photoCredit: (author: string) => `Photo: ${author}`,
   unitProgress: (done: number, total: number) => `${done} of ${total} lessons done`,
