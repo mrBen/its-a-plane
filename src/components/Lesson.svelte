@@ -93,8 +93,10 @@
   let index = $state(0);
   let picked = $state<string | null>(null);
 
-  // The mark on the front needs a moment to read before the card turns.
+  // The mark on the front needs a moment to read before the card turns. A
+  // correct answer needs less of it.
   const REVEAL_DELAY = 800;
+  const QUICK_REVEAL_DELAY = 300;
   let turned = $state(false);
   let turnTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -118,9 +120,12 @@
       queue.push({ ...exercise, repeat: true });
     }
     clearTimeout(turnTimer);
-    turnTimer = setTimeout(() => {
-      turned = true;
-    }, REVEAL_DELAY);
+    turnTimer = setTimeout(
+      () => {
+        turned = true;
+      },
+      right ? QUICK_REVEAL_DELAY : REVEAL_DELAY,
+    );
   }
 
   function next() {

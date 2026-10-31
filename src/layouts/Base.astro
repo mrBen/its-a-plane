@@ -11,6 +11,15 @@ const { title } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pageTitle = title ? `${title} · ${strings.siteTitle}` : strings.siteTitle;
 const themes = ['light', 'dark', 'system'] as const;
+
+// Lucide icons (ISC): sun, moon and monitor. The footer credits the set.
+const themeIcons = {
+  light:
+    '<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />',
+  dark: '<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />',
+  system:
+    '<rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" />',
+} as const;
 ---
 
 <html lang="en">
@@ -33,28 +42,51 @@ const themes = ['light', 'dark', 'system'] as const;
   <body>
     <section class="section">
       <div class="container is-max-tablet">
-        <header class="block">
-          <h1 class="title is-1"><a href={`${base}/`}>{strings.siteTitle}</a></h1>
-          <p class="subtitle">{strings.tagline}</p>
+        <header class="block site-header">
+          <div>
+            <h1 class="title is-1"><a href={`${base}/`}>{strings.siteTitle}</a></h1>
+            <p class="subtitle">{strings.tagline}</p>
+          </div>
+          <div class="buttons has-addons theme-switch" role="group" aria-label={strings.theme.label}>
+            {themes.map((t) => (
+              <button
+                type="button"
+                class="button is-small"
+                data-theme-choice={t}
+                aria-label={strings.theme[t]}
+                title={strings.theme[t]}
+              >
+                <svg
+                  class="theme-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={themeIcons[t]}
+                />
+              </button>
+            ))}
+          </div>
         </header>
         <main class="block">
           <slot />
         </main>
-        <footer class="block">
-          <div class="buttons has-addons" role="group" aria-label={strings.theme.label}>
-            {themes.map((t) => (
-              <button type="button" class="button is-small" data-theme-choice={t}>
-                {strings.theme[t]}
-              </button>
-            ))}
-          </div>
-          <!-- Decision 38: the free icon set takes an attribution line. -->
-          <p class="is-size-7 mt-4">
-            <a href={`${base}/icon-license.txt`}>{strings.iconCredit}</a>
-          </p>
-        </footer>
       </div>
     </section>
+    <footer class="site-footer">
+      <div class="container is-max-tablet">
+        <!-- Decision 38: the free icon set takes an attribution line. -->
+        <p class="site-credit">
+          <a href={`${base}/icon-license.txt`}>{strings.iconCredit}</a>
+        </p>
+      </div>
+    </footer>
     <script>
       const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-choice]');
 
@@ -84,3 +116,54 @@ const themes = ['light', 'dark', 'system'] as const;
     </script>
   </body>
 </html>
+
+<style>
+  :global(body) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  /* The section grows, so the footer reaches the bottom of a short page and
+     follows the content of a long one. */
+  .section {
+    flex: 1;
+  }
+  .site-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .theme-switch {
+    margin-bottom: 0;
+    margin-left: auto;
+  }
+  /* On a phone the title fills the row, so the switch sits beside the tagline
+     instead of wrapping onto a row of its own. */
+  @media screen and (max-width: 768px) {
+    .site-header {
+      position: relative;
+      display: block;
+    }
+    .theme-switch {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+    }
+  }
+  .theme-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .site-footer {
+    padding: 1.5rem 1.5rem 2rem;
+    border-top: 1px solid var(--bulma-border-weak);
+  }
+  .site-credit {
+    color: var(--bulma-text-weak);
+    font-size: 0.875rem;
+  }
+</style>
