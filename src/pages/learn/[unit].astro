@@ -20,10 +20,15 @@ if (!left || !right) throw new Error(`Unit ${unitId}: unknown photo id`);
 const feature = await getEntry('features', unitId);
 if (!feature) throw new Error(`Unit ${unitId}: no feature with this id`);
 const modelIds = new Set(feature.data.types.flatMap((t) => t.modelIds.map((m) => m.id)));
-const models = (await getCollection('models', (m) => modelIds.has(m.id))).map((m) => ({
-  id: m.id,
-  designation: m.data.designation,
-}));
+const models = (await getCollection('models', (m) => modelIds.has(m.id))).map((m) => {
+  const tell = m.data.tells.find((t) => t.feature.id === unitId);
+  if (!tell) throw new Error(`Model ${m.id}: no tell for ${unitId}`);
+  return {
+    id: m.id,
+    designation: m.data.designation,
+    tell: tell.text,
+  };
+});
 const photos = (await getCollection('photos', (p) => modelIds.has(p.data.modelId.id))).map((p) => ({
   id: p.id,
   modelId: p.data.modelId.id,

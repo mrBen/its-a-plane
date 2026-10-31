@@ -5,6 +5,7 @@
   interface Model {
     id: string;
     designation: string;
+    tell: string;
   }
 
   interface CropBox {
@@ -118,49 +119,91 @@
     </div>
     <progress class="progress is-large is-primary" value={index} max={queue.length}></progress>
 
-    <div class="card">
-      <div class="card-image">
-        {#if exercise.kind === 'crop'}
-          <Crop photo={exercise.photo} {part} {base} alt={strings.lesson.cropAlt} />
-        {:else}
-          <img src={`${base}/${exercise.photo.image}`} alt={strings.lesson.photoAlt} />
-        {/if}
-      </div>
-      <div class="card-content">
-        <p class="is-size-7 block">
-          <!-- The source page names the model in its URL, so it links only after the pick. -->
-          {#if picked}
-            <a href={exercise.photo.sourceUrl}>{strings.photoCredit(exercise.photo.author)}</a>,
-          {:else}
-            {strings.photoCredit(exercise.photo.author)},
-          {/if}
-          <a href={exercise.photo.licenseUrl}>{exercise.photo.license}</a>
-        </p>
-        <p class="title is-5">{strings.lesson.question}</p>
-        <div class="candidates">
-          {#each exercise.candidates as model (model.id)}
-            <button
-              type="button"
-              class="button is-medium is-fullwidth designation {buttonClass(model.id)}"
-              disabled={picked !== null}
-              onclick={() => pick(model.id)}
-            >
-              {model.designation}
-            </button>
-          {/each}
+    <div class="card flip-card" class:turned={picked !== null}>
+      <div class="flip">
+        <div class="face front" aria-hidden={picked !== null} inert={picked !== null}>
+          <div class="card-image">
+            {#if exercise.kind === 'crop'}
+              <Crop photo={exercise.photo} {part} {base} alt={strings.lesson.cropAlt} />
+            {:else}
+              <img src={`${base}/${exercise.photo.image}`} alt={strings.lesson.photoAlt} />
+            {/if}
+          </div>
+          <div class="card-content">
+            <p class="is-size-7 block">
+              <!-- The source page names the model in its URL, so it links only after the pick. -->
+              {#if picked}
+                <a href={exercise.photo.sourceUrl}>{strings.photoCredit(exercise.photo.author)}</a>,
+              {:else}
+                {strings.photoCredit(exercise.photo.author)},
+              {/if}
+              <a href={exercise.photo.licenseUrl}>{exercise.photo.license}</a>
+            </p>
+            <p class="title is-5">{strings.lesson.question}</p>
+            <div class="candidates">
+              {#each exercise.candidates as model (model.id)}
+                <button
+                  type="button"
+                  class="button is-medium is-fullwidth designation {buttonClass(model.id)}"
+                  disabled={picked !== null}
+                  onclick={() => pick(model.id)}
+                >
+                  {model.designation}
+                </button>
+              {/each}
+            </div>
+          </div>
         </div>
-        {#if picked}
-          <!-- TODO: task 10 moves this button to the back of the card. -->
-          <button type="button" class="button is-primary is-rounded is-medium next" onclick={next}>
-            {isLast ? strings.lesson.finish : strings.lesson.next}
-          </button>
-        {/if}
+
+        <div class="face back" aria-hidden={picked === null} inert={picked === null}>
+          <div class="card-content back-content">
+            <p class="designation title is-3">{exercise.answer.designation}</p>
+            <p class="block is-size-5">{exercise.answer.tell}</p>
+            <button type="button" class="button is-primary is-rounded is-medium" onclick={next}>
+              {isLast ? strings.lesson.finish : strings.lesson.next}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   {/if}
 </div>
 
 <style>
+  .flip-card {
+    perspective: 1200px;
+  }
+  .flip {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s ease;
+  }
+  /* Decision 12: the card turns on every answer. */
+  .turned .flip {
+    transform: rotateY(180deg);
+  }
+  .face {
+    border-radius: var(--bulma-card-radius);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .front {
+    position: relative;
+  }
+  .back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    background-color: var(--bulma-card-background-color);
+  }
+  .back-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
   .card-image img {
     display: block;
     width: 100%;
@@ -174,7 +217,10 @@
   .candidates .button:disabled {
     opacity: 1;
   }
-  .next {
-    margin-top: 1.25rem;
+  /* Decision 12 and the plan: no turn under prefers-reduced-motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .flip {
+      transition: none;
+    }
   }
 </style>
