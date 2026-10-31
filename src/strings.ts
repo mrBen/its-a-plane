@@ -30,6 +30,7 @@ export const strings = {
     wrong: 'Not quite',
   },
   photoCredit: (author: string) => `Photo: ${author}`,
+  iconCredit: 'Plane icon: Lucide (ISC)',
   unitProgress: (done: number, total: number) => `${done} of ${total} lessons done`,
   theme: {
     label: 'Theme',
