@@ -24,6 +24,8 @@ The first version covers one unit, the engine count, with six models and two
 lessons.
 
 The site runs as static files on GitHub Pages, with no server and no account.
+It is live at https://mrben.github.io/its-a-plane/, and it installs as a
+standalone app from the browser.
 
 ## Non-goals
 
@@ -38,22 +40,40 @@ The site runs as static files on GitHub Pages, with no server and no account.
 - A mascot, in the first version.
 - A native phone app. The progressive web app covers the install.
 
+## Built with
+
+Astro 7 writes the static site, with one Svelte 5 island for the lesson. The
+data sits in Astro content collections with a Zod schema, and TypeScript runs
+throughout. Bulma 1.0.4 supplies the CSS, copied into `src/styles/`. The site
+deploys to GitHub Pages with `withastro/action`, and the project runs in a Node
+26 devcontainer.
+
+## Running it
+
+The project runs in the devcontainer, which carries Node 26. Nothing installs
+on the host.
+
+```sh
+npm install
+npm run dev
+```
+
+The dev server answers at http://localhost:4321/its-a-plane/. `npm run build`
+writes the static site to `dist/`.
+
 ## Decisions
 
 The decision log lives in [`decisions.md`](decisions.md).
 
 ## Open questions
 
-1. The npm registry. Closed on 2026-10-29. Where `registry.npmjs.org` is out
-   of reach, `.devcontainer/local.env` points npm to a local registry. See
-   decisions 49 to 51 in `decisions.md`.
-2. The mascot. One idea sits on the table: a bird that people take for a plane,
+1. The mascot. One idea sits on the table: a bird that people take for a plane,
    from the line in the name. Nobody decided it.
-3. The photo source for the full course. Wikimedia Commons serves the first six
-   photos. Task 14 surveys the other sources: the terms, the CORS headers and
-   the label quality of each one.
-4. The accent color for each of the five units. The palette is not chosen.
-5. The license file. The repo carries none, so all rights reserved. Revisit it
+2. The photo source for the full course. Wikimedia Commons serves the first six
+   photos. The other sources are still to be surveyed: the terms, the CORS
+   headers and the label quality of each one.
+3. The accent color for each of the five units. The palette is not chosen.
+4. The license file. The repo carries none, so all rights reserved. Revisit it
    when somebody asks to reuse the code.
 
 ## The other files

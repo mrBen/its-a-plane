@@ -56,3 +56,5 @@ the decision, and the date names the day.
 | 49 | Node 26 runs in a devcontainer, `mcr.microsoft.com/devcontainers/javascript-node:26`. Nothing installs on the host | Benjamin | 2026-10-29 |
 | 50 | The repo keeps the default npm registry. A local registry goes in `.devcontainer/local.env`, and git ignores that file | Benjamin | 2026-10-29 |
 | 51 | When a local registry is used, `.devcontainer/local.env` sets `npm_config_omit_lockfile_registry_resolved=true`, so no local registry host goes into `package-lock.json` | Benjamin | 2026-10-31 |
+| 52 | The icon set is Lucide (ISC). The plane icon and the theme icons come from it, and the footer credits it and links the license | Benjamin | 2026-10-31 |
+| 53 | The manifest short name is `its-a-plane` | Benjamin | 2026-10-31 |
