@@ -29,6 +29,7 @@
     "enginePosition": "underwing",
     "tailType": "conventional",
     "wingletTypes": [
+      "fence",
       "canted"
     ],
     "tells": [

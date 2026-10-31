@@ -8,6 +8,13 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Git
+
+Never run `git commit` or `git push` without a request from Benjamin.
+
+Make one commit for each finished task. In the reply, name the files in the
+commit and the commit message, then wait for Benjamin to ask for the commit.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

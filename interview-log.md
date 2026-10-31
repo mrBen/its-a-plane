@@ -6,7 +6,7 @@ wins.
 The folder started as `web-game`, a placeholder. Topic 5 settled the name on
 2026-10-28, and I renamed the folder to `its-a-plane`.
 
-## The goal, in bcollet's words
+## The goal, in Benjamin's words
 
 "I want to create a web-based game, let's start the interview, starting with the
 name so we can create the folder and initialize the git repo"
@@ -157,7 +157,7 @@ Second pass on topic 2.
   answer. Every guess names the model and the tell.
 
 - Q: At the easy level, where do the wrong candidates come from?
-- A: Random models. I said that a random set is often too easy, and bcollet kept
+- A: Random models. I said that a random set is often too easy, and Benjamin kept
   random. `design.md` records the trade-off.
 
 Consequence of C2. The game needs a model reference: one record for each model,
@@ -206,7 +206,7 @@ teaches. One component holds the whole feedback rule.
 
 - Q: Which name do you like?
 - A: "I had something like "what is that plane" in mind, I want to discuss it".
-  I gave four candidates: Type Rating, Winglet, Squawk, Spot Check. bcollet
+  I gave four candidates: Type Rating, Winglet, Squawk, Spot Check. Benjamin
   brought his own. The discussion runs in the next pass.
 
 - Q: Does the name need a matching domain?
@@ -218,7 +218,7 @@ teaches. One component holds the whole feedback rule.
 Second pass on topic 5.
 
 - Q: Which form of the name wins?
-- A: "What Plane?", with the repo `what-plane`. bcollet took the recommendation.
+- A: "What Plane?", with the repo `what-plane`. Benjamin took the recommendation.
 
 - Q: Should I check whether the name is already in use?
 - A: Yes, check it now.
@@ -245,7 +245,7 @@ Recognition Quiz", "Aircraft Photos Quiz". A name that starts with "Guess the"
 joins a crowd.
 
 Claude proposes "Name That Plane". Nobody decided it yet. It is free in the
-store, it signals a quiz, and it keeps the meaning of bcollet's first idea.
+store, it signals a quiz, and it keeps the meaning of Benjamin's first idea.
 
 Third pass on topic 5.
 
@@ -276,7 +276,7 @@ Fourth pass on topic 5.
 Check of 2026-10-28. No Apple store app carries the name "Is It a Plane" or
 "It's a Plane". GitHub holds two repositories: `boryanvbu/is-it-a-plane` and
 `DevanshGaira/Is-It-a-Bird-Is-It-a-Plane-It-s-Superman-`. A repository name only
-needs to stay unique inside one account, so `is-it-a-plane` is free for bcollet.
+needs to stay unique inside one account, so `is-it-a-plane` is free for Benjamin.
 
 Weak part. The title asks a yes or no question, and the game asks for a model.
 Claude proposes a tagline to carry the function, and nobody decided it yet.
@@ -284,7 +284,7 @@ Claude proposes a tagline to carry the function, and nobody decided it yet.
 Fifth pass on topic 5.
 
 - Q: Can you check the exact meme before we settle on a name?
-- A: bcollet asked for the source. I read the two Wikipedia articles on the
+- A: Benjamin asked for the source. I read the two Wikipedia articles on the
   series, and I report the two versions of the line.
 
 | Version | The line |
@@ -309,14 +309,14 @@ right answer, and the player does the same thing.
 | Display name | It's a Plane! |
 | Tagline | But which one? |
 | Repo and folder | its-a-plane |
-| Source of the name | The Superman opening line. bcollet proposed the reference. |
+| Source of the name | The Superman opening line. Benjamin proposed the reference. |
 
 The name keeps the apostrophe. The house style rule bans a contraction in prose,
 and a quoted line keeps its own words.
 
 Check of 2026-10-28. No Apple store app carries the name. GitHub holds five
 repositories named `its-a-plane`, and none is a quiz. Three of them read ADS-B
-data. The name is free inside bcollet's own account.
+data. The name is free inside Benjamin's own account.
 
 ### Topic 6, the build and the delivery
 
@@ -348,7 +348,7 @@ Second pass on topic 6.
   planned task.
 
 - Q: Who writes the model records?
-- A: Claude drafts, and bcollet checks the aviation facts. Open item 4 closes.
+- A: Claude drafts, and Benjamin checks the aviation facts. Open item 4 closes.
 
 - Q: Where do the three photos of the first version come from?
 - A: Wikimedia Commons. Each photo needs an author line and a license line.
@@ -382,7 +382,7 @@ publishes the page, so the site needs its own folder:
 
 ## The change of goal, 2026-10-28
 
-bcollet read the 25 decisions and changed the goal: "I changed my mind, I do not
+Benjamin read the 25 decisions and changed the goal: "I changed my mind, I do not
 want a quizz game, I want a learning site (duolingo style), and quizz are a
 sub-feature of it".
 
@@ -439,7 +439,7 @@ Douglas MD-11. Topic 5 picks the six models under this constraint.
 ### Second pass, topic 2, the exercise types
 
 - Q: Which exercise types does a lesson hold?
-- A: Two types. Photo to model, and a crop of one part. bcollet left out the
+- A: Two types. Photo to model, and a crop of one part. Benjamin left out the
   two-photo type and the model-to-feature type.
 
 - Q: What happens on a wrong answer inside a lesson?
@@ -547,7 +547,7 @@ Second pass on topic 5.
 ### Second pass, topic 6, the stack and the storage
 
 - Q: Decision 19, again. Which stack?
-- A: bcollet asked about Ionic, then asked for a comparison: "do you know
+- A: Benjamin asked about Ionic, then asked for a comparison: "do you know
   anything like Ionic, so we can compare, and take a better descision?". The
   question stays open, and the comparison follows.
 
@@ -591,7 +591,7 @@ second line of defence.
 Second pass on topic 6.
 
 - Q: Which view layer?
-- A: bcollet corrected the premise: "I don't care about the build or no build
+- A: Benjamin corrected the premise: "I don't care about the build or no build
   step, I care about the no server, hostable in a github page. Also if shoelace
   is the old version of webawesome, remove it from the options".
 
@@ -606,7 +606,7 @@ table meets it, because each one writes static files. Shoelace leaves the list.
 Fact, checked on this machine on 2026-10-28. `node` and `npm` do not exist in
 the path. The sibling projects use bash and Python: `psdevenv/tooling` holds one
 Python script and six bash scripts. So an npm stack starts with an install of
-Node, and a Python generator uses the tooling that bcollet already runs.
+Node, and a Python generator uses the tooling that Benjamin already runs.
 
 Third pass on topic 6.
 
@@ -617,9 +617,9 @@ Third pass on topic 6.
   entry through `getStaticPaths()`, and the official `withastro/action` deploy.
 
 - Q: Which language runs inside the lesson island?
-- A: bcollet asked for a comparison first: "I like svelte, but I never used it,
+- A: Benjamin asked for a comparison first: "I like svelte, but I never used it,
   can you make me a comparaison between svelte and plain TS?". I showed the same
-  lesson code in both. Then bcollet chose Svelte 5.
+  lesson code in both. Then Benjamin chose Svelte 5.
 
 Reasons for Svelte, as I gave them. The island is one component, with no router
 and no server, so it is the right size to learn on. A change of mind costs one
@@ -643,7 +643,7 @@ Checked on 2026-10-28: the Svelte docs cover Svelte 5, and the runes are
 
 ### Second pass, topic 7, the look
 
-bcollet opened this topic after the decision list: "for the look, do I need a UI
+Benjamin opened this topic after the decision list: "for the look, do I need a UI
 component library?".
 
 - Q: Do you need a UI component library?
@@ -655,7 +655,7 @@ component library?".
 - A: The system font, plus a monospace face for the model designation.
 
 - Q: Decision 36, again?
-- A: bcollet asked to revisit it. I named the reason: decision 36 described one
+- A: Benjamin asked to revisit it. I named the reason: decision 36 described one
   screen, and the site now holds eight screen types. I also named the tension
   between a friendly course for a beginner and a dense reference for an expert.
 
@@ -673,7 +673,7 @@ component library?".
   line in the name.
 
 - Q: Which CSS layer, after the friendly course answer?
-- A: bcollet asked for an option other than Web Awesome, then asked whether
+- A: Benjamin asked for an option other than Web Awesome, then asked whether
   Bulma stays alive. He chose Bulma, vendored in the repo.
 
 #### The CSS layer comparison, checked on 2026-10-28
@@ -707,7 +707,7 @@ file. No CDN outage and no npm change can reach the site.
 
 ## The end of the interview
 
-bcollet typed "agreed" on 2026-10-28. I wrote `README.md`, `design.md`,
+Benjamin typed "agreed" on 2026-10-28. I wrote `README.md`, `design.md`,
 `build-plan.md` and `progress.md`, then closed this log.
 
 Open items: none. Items 1 to 4 closed. C1 to C4 resolved. K1, K2 and P1 closed.

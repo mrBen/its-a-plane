@@ -4,14 +4,14 @@
 
 | # | Constraint | Source |
 |---|---|---|
-| 1 | Static files only. No server, no account, no database | bcollet, decision 27 |
-| 2 | GitHub Pages hosts the site | bcollet, decision 28 |
-| 3 | The phone and the desktop carry equal weight | bcollet, decision 39 |
+| 1 | Static files only. No server, no account, no database | Benjamin, decision 27 |
+| 2 | GitHub Pages hosts the site | Benjamin, decision 28 |
+| 3 | The phone and the desktop carry equal weight | Benjamin, decision 39 |
 | 4 | Safari deletes the script-writable storage of a site after seven days of Safari use with no interaction on that site. A site that the player adds to the home screen is exempt | The WebKit blog, the post on full third-party cookie blocking, read on 2026-10-28 |
-| 5 | Each photo needs an author line and a license line | bcollet, decision 43 |
+| 5 | Each photo needs an author line and a license line | Benjamin, decision 43 |
 | 6 | This agent sandbox cannot reach `registry.npmjs.org`. The host times out, and `www.npmjs.com` answers 403. `nodejs.org` and `cdn.jsdelivr.net` answer 200 | A test on 2026-10-28 |
 | 7 | Almost every airliner in passenger service has two engines. Four engines means the A380 and a few A340. Three engines means a rare freighter | A fact. It picked the six models of unit 1 |
-| 8 | Bulma lives in the repo as a copied file, not as a CDN link | bcollet, decision 44 |
+| 8 | Bulma lives in the repo as a copied file, not as a CDN link | Benjamin, decision 44 |
 
 ## The structure
 
@@ -92,7 +92,7 @@ Actions, and that setting needs the repository owner.
 
 | Option | Why not |
 |---|---|
-| A quiz game with no course | bcollet changed the goal on 2026-10-28. The quiz became one exercise type |
+| A quiz game with no course | Benjamin changed the goal on 2026-10-28. The quiz became one exercise type |
 | Plain HTML, CSS and JS | It writes no reference page from the data, and the records get no schema |
 | Ionic 9, Framework7 9 | Their iOS and Android look fights the friendly course look, and both add a component model |
 | Web Awesome 3 | A paid Pro tier, and the docs name no license |
@@ -100,21 +100,21 @@ Actions, and that setting needs the repository owner.
 | Tailwind and daisyUI | The install page names no license, and it adds Tailwind to the build |
 | Bootstrap 5.3.8 | A team maintains it, and that is the stronger point. Its look is the most generic, and Bulma won on the look |
 | Open Props | Tokens only. Every component stays mine to write |
-| The two-photo exercise type | bcollet left it out of the list |
-| The model-to-feature exercise type | bcollet left it out of the list |
-| Hearts, or a pass mark | bcollet chose a score that locks nothing |
+| The two-photo exercise type | Benjamin left it out of the list |
+| The model-to-feature exercise type | Benjamin left it out of the list |
+| Hearts, or a pass mark | Benjamin chose a score that locks nothing |
 | A server with accounts | Constraint 1 |
 | A shared leaderboard | It needs a server, and it invites cheating |
 | A spotter site API called from the browser | A static page cannot hold a key, and the terms need a read. Task 14 surveys it |
-| A native phone app through Capacitor | bcollet chose a progressive web app |
+| A native phone app through Capacitor | Benjamin chose a progressive web app |
 
 ## The trade-offs
 
 What this design costs:
 
 1. Node and npm, a dependency tree and a build step. Constraint 6 blocks the
-   install inside this agent sandbox, so bcollet runs the npm commands himself.
-2. Two new tools for bcollet to learn: Astro and Svelte 5.
+   install inside this agent sandbox, so Benjamin runs the npm commands himself.
+2. Two new tools for Benjamin to learn: Astro and Svelte 5.
 3. Class names from Bulma in the markup. A move away from it touches the markup,
    and no logic.
 
@@ -124,7 +124,7 @@ What it buys:
 2. The Zod schema fails the build on a bad record, instead of a blank screen.
 3. One island of interactive code. Every other page ships no JavaScript.
 
-The costs that bcollet accepted, after I named them:
+The costs that Benjamin accepted, after I named them:
 
 | Cost | Where it shows |
 |---|---|
