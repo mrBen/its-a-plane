@@ -1,9 +1,18 @@
 <script lang="ts">
   import { strings } from '../strings';
+  import Crop from './Crop.svelte';
 
   interface Model {
     id: string;
     designation: string;
+  }
+
+  interface CropBox {
+    part: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
   }
 
   interface Photo {
@@ -14,9 +23,14 @@
     license: string;
     licenseUrl: string;
     sourceUrl: string;
+    crops: CropBox[];
   }
 
+  // Decision 10: a photo to the model, and a crop of one part.
+  type Kind = 'photo' | 'crop';
+
   interface Exercise {
+    kind: Kind;
     photo: Photo;
     answer: Model;
     candidates: Model[];
@@ -25,6 +39,7 @@
   interface Props {
     models: Model[];
     photos: Photo[];
+    part: string;
     base: string;
   }
 
@@ -33,7 +48,7 @@
   // Decision 14: four candidate buttons.
   const CANDIDATE_COUNT = 4;
 
-  let { models, photos, base }: Props = $props();
+  let { models, photos, part, base }: Props = $props();
 
   function shuffle<T>(items: T[]): T[] {
     const out = [...items];
@@ -44,13 +59,23 @@
     return out;
   }
 
+  // Decision 11: one lesson mixes the two types. Both must appear, so a draw
+  // that comes out one-sided turns one exercise over.
+  function drawKinds(count: number): Kind[] {
+    const kinds = Array.from({ length: count }, () => (Math.random() < 0.5 ? 'photo' : 'crop'));
+    if (!kinds.includes('photo')) kinds[Math.floor(Math.random() * count)] = 'photo';
+    if (!kinds.includes('crop')) kinds[Math.floor(Math.random() * count)] = 'crop';
+    return kinds;
+  }
+
   function draw(): Exercise[] {
+    const kinds = drawKinds(LESSON_LENGTH);
     return shuffle(photos)
       .slice(0, LESSON_LENGTH)
-      .map((photo) => {
+      .map((photo, i) => {
         const answer = models.find((m) => m.id === photo.modelId)!;
         const wrong = shuffle(models.filter((m) => m.id !== answer.id)).slice(0, CANDIDATE_COUNT - 1);
-        return { photo, answer, candidates: shuffle([answer, ...wrong]) };
+        return { kind: kinds[i], photo, answer, candidates: shuffle([answer, ...wrong]) };
       });
   }
 
@@ -95,7 +120,11 @@
 
     <div class="card">
       <div class="card-image">
-        <img src={`${base}/${exercise.photo.image}`} alt={strings.lesson.photoAlt} />
+        {#if exercise.kind === 'crop'}
+          <Crop photo={exercise.photo} {part} {base} alt={strings.lesson.cropAlt} />
+        {:else}
+          <img src={`${base}/${exercise.photo.image}`} alt={strings.lesson.photoAlt} />
+        {/if}
       </div>
       <div class="card-content">
         <p class="is-size-7 block">

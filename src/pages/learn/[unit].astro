@@ -32,6 +32,7 @@ const photos = (await getCollection('photos', (p) => modelIds.has(p.data.modelId
   license: p.data.license,
   licenseUrl: p.data.licenseUrl,
   sourceUrl: p.data.sourceUrl,
+  crops: p.data.crops,
 }));
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
@@ -52,7 +53,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <p class="block"><a href="#teaching">{strings.showTeaching}</a></p>
     <!-- client:only, because the island draws the exercises at random, and a
          server render would draw a different set. -->
-    <Lesson client:only="svelte" models={models} photos={photos} base={base} />
+    <Lesson client:only="svelte" models={models} photos={photos} part={part} base={base} />
   </section>
 </Base>
 

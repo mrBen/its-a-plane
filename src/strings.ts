@@ -17,6 +17,7 @@ export const strings = {
   lesson: {
     question: 'Which aircraft is this?',
     photoAlt: 'An airliner. Name the model.',
+    cropAlt: 'Part of an airliner. Name the model.',
     next: 'Next',
     finish: 'See the score',
     exercise: (n: number, total: number) => `Exercise ${n} of ${total}`,
