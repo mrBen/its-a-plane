@@ -35,6 +35,8 @@
     photo: Photo;
     answer: Model;
     candidates: Model[];
+    number: number;
+    repeat: boolean;
   }
 
   interface Props {
@@ -76,14 +78,25 @@
       .map((photo, i) => {
         const answer = models.find((m) => m.id === photo.modelId)!;
         const wrong = shuffle(models.filter((m) => m.id !== answer.id)).slice(0, CANDIDATE_COUNT - 1);
-        return { kind: kinds[i], photo, answer, candidates: shuffle([answer, ...wrong]) };
+        return {
+          kind: kinds[i],
+          photo,
+          answer,
+          candidates: shuffle([answer, ...wrong]),
+          number: i + 1,
+          repeat: false,
+        };
       });
   }
 
   let queue = $state(draw());
   let index = $state(0);
   let picked = $state<string | null>(null);
-  let score = $state(0);
+
+  // Decision 13: the score counts each exercise once, however many times it
+  // comes back. Decision 12: a missed exercise returns at the end of the queue.
+  let scored = $state<number[]>([]);
+  let score = $derived(scored.length);
 
   let exercise = $derived(queue[index]);
   let finished = $derived(index >= queue.length);
@@ -92,13 +105,35 @@
   function pick(modelId: string) {
     if (picked) return;
     picked = modelId;
-    if (modelId === exercise.answer.id) score++;
+    const right = modelId === exercise.answer.id;
+    if (right) {
+      if (!scored.includes(exercise.number)) scored.push(exercise.number);
+    } else if (!exercise.repeat) {
+      queue.push({ ...exercise, repeat: true });
+    }
   }
 
   function next() {
     picked = null;
     index++;
   }
+
+  function playAgain() {
+    queue = draw();
+    index = 0;
+    picked = null;
+    scored = [];
+  }
+
+  // Plan step 5: a finished lesson starts again when the hash comes back to
+  // #lesson. A lesson in progress keeps its state.
+  $effect(() => {
+    function onHash() {
+      if (window.location.hash === '#lesson' && finished) playAgain();
+    }
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  });
 
   function buttonClass(modelId: string): string {
     if (!picked) return '';
@@ -110,11 +145,24 @@
 
 <div class="lesson">
   {#if finished}
-    <!-- TODO: task 11 replaces this line with the score screen. -->
-    <p class="title is-4">{strings.lesson.done(score, queue.length)}</p>
+    <div class="score-screen">
+      <p class="title is-4">{strings.lesson.done(score, LESSON_LENGTH)}</p>
+      <div class="buttons">
+        <button type="button" class="button is-primary is-rounded is-medium" onclick={playAgain}>
+          {strings.lesson.playAgain}
+        </button>
+        <a class="button is-light is-rounded is-medium" href={`${base}/`}>
+          {strings.lesson.backToUnits}
+        </a>
+      </div>
+    </div>
   {:else}
     <div class="level is-mobile">
-      <p class="level-left">{strings.lesson.exercise(index + 1, queue.length)}</p>
+      <p class="level-left">
+        {exercise.repeat
+          ? strings.lesson.repeat(exercise.number)
+          : strings.lesson.exercise(exercise.number, LESSON_LENGTH)}
+      </p>
       <p class="level-right">{strings.lesson.score(score)}</p>
     </div>
     <progress class="progress is-large is-primary" value={index} max={queue.length}></progress>
@@ -170,6 +218,9 @@
 </div>
 
 <style>
+  .score-screen {
+    padding: 2rem 0;
+  }
   .flip-card {
     perspective: 1200px;
   }
